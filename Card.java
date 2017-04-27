@@ -2,8 +2,10 @@
 public class Card
 {
     int number;
-    public Card(int num)
+    String type;
+    public Card(int num, String t)
     {
         number = num;
+        type = t;
     }
 }
