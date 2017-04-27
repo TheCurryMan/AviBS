@@ -16,7 +16,8 @@ public class Deck
             }
         }
         
-        shuffle();
+        this.shuffle();
+        
     }
 
 
@@ -25,7 +26,8 @@ public class Deck
         ArrayList<Card> temp = new ArrayList<Card>();
         for (int i = 52; i > 0; i--)
         {
-            int index = (int) Math.random()*i;
+            int index = (int) (Math.random()*i);
+            System.out.println(index);
             temp.add( deck.get( index ));
             deck.remove( index );
         }

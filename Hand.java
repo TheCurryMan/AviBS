@@ -1,6 +1,8 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
-public class Hand
+public class Hand extends ArrayList<Integer>
 {
     ArrayList<Card> hand = new ArrayList<Card>();
     public Hand()
@@ -11,6 +13,8 @@ public class Hand
     public void addCard(Card c)
     {
         hand.add( c );
+        Comparator<Card> comp = new CardComparator();
+        Collections.sort(hand, comp);
     }
     
     public ArrayList<Card> getHand() 

@@ -20,7 +20,7 @@ public class Player
     }
     
     public String viewHand() {
-        
+        return currentHand.viewHand();
     }
     
     
