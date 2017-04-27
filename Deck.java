@@ -10,8 +10,10 @@ public class Deck
     {
         for ( int i = 1; i < 14; i++ )
         {
-            for ( int j = 0; j < 4; j++ )
-                //deck.add( new Card( i ) );
+            for (int j = 0; j < 4; j++)
+            { 
+                deck.add( new Card(i) );
+            }
         }
     }
 
