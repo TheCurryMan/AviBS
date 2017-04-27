@@ -15,6 +15,8 @@ public class Deck
                 deck.add( new Card(i) );
             }
         }
+        
+        shuffle();
     }
 
 
@@ -29,4 +31,10 @@ public class Deck
         }
         deck = temp;
     }
+    
+    public ArrayList<Card> getDeck()
+    {
+        return deck;
+    }
+    
 }

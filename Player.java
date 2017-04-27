@@ -19,6 +19,10 @@ public class Player
         this.currentHand.addCard( c );
     }
     
+    public String viewHand() {
+        
+    }
+    
     
 
 }

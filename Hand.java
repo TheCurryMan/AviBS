@@ -23,9 +23,9 @@ public class Hand
         String finalStr = "";
         for (Card c: hand)
         {
-            
+            finalStr += " " + c.getNum();
         } 
-        return "";
+        return finalStr;
     }
  
 
