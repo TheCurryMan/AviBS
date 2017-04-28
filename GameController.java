@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GameController
 {
@@ -37,5 +38,28 @@ public class GameController
     }
     
     
+    public void play(Player p)
+    {
+        ArrayList<Card> play = new ArrayList<Card>();
+        Scanner user_input = new Scanner(System.in);
+        String currendHand = p.viewHand();
+        
+        System.out.print( "How many cards do you want to play?" );
+        String num = user_input.next();
+        char n = num.charAt( 0 );
+        int number = Character.getNumericValue(n);
+        
+        System.out.print( "What do you want to play them as?" );
+        String val = user_input.next();
+        
+        for (int i = 0; i < number; i++)
+        {
+            System.out.print( "What card do you want to play?" );
+            String newCard = user_input.next();
+            char c = newCard.charAt( 0 );
+            int cardVal = Character.getNumericValue( c );
+            
+        }
+    }
 }
 

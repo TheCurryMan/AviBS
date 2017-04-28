@@ -31,6 +31,9 @@ public class Hand extends ArrayList<Integer>
         } 
         return finalStr;
     }
- 
-
+    
+    public boolean contains(String input)
+    {
+        return viewHand().indexOf( input) >=0;
+    }
 }
