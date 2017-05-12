@@ -17,6 +17,11 @@ public class Hand extends ArrayList<Integer>
         Collections.sort(hand, comp);
     }
     
+    public void addCards(ArrayList<Card> c)
+    {
+        hand.addAll( c );
+    }
+    
     public ArrayList<Card> getHand() 
     {
         return hand;

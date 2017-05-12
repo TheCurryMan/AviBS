@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+
 public class Player
 {
     private String name;
@@ -19,18 +20,28 @@ public class Player
         this.currentHand.addCard( c );
     }
     
-    public String viewHand() 
-    {
+    public String viewHand() {
         return currentHand.viewHand();
     }
     
-    public Card playCard (String input)
+    public String getName()
     {
-        if(viewHand().contains( input ))
-        {
-            
-        }
-        
+        return this.name;
     }
+    
+    public void addCards(ArrayList<Card> cards)
+    {
+        this.currentHand.addCards(cards);
+    }
+    
+//    public Card playCard (String input)
+//    {
+//        if(viewHand().contains( input ))
+//        {
+//            
+//        }
+//        
+//    }
+    
 
 }
