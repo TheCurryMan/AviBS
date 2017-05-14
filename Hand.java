@@ -10,6 +10,18 @@ public class Hand extends ArrayList<Integer>
         
     }
     
+    public void removeNum(int cint)
+    {
+        for (Card c:hand)
+        {
+            if (c.getNum() == cint)
+            {
+                hand.remove( c );
+                break;
+            }
+        }
+    }
+    
     public void addCard(Card c)
     {
         hand.add( c );
@@ -20,6 +32,8 @@ public class Hand extends ArrayList<Integer>
     public void addCards(ArrayList<Card> c)
     {
         hand.addAll( c );
+        Comparator<Card> comp = new CardComparator();
+        Collections.sort(hand, comp);
     }
     
     public ArrayList<Card> getHand() 

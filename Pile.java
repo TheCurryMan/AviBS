@@ -21,10 +21,11 @@ public class Pile
         }
         currentPile.addAll( c );
         lastAdd = c;
-    }
+    } 
     
     public Player bluffCalled(Player currentPlayer, Player lastPlayer)
     {
+       
         for (Card c: lastAdd)
         {
             if (c.getNum() != currentCard) 
@@ -32,13 +33,45 @@ public class Pile
                 lastPlayer.addCards( currentPile );
                 currentPile.clear();
                 lastAdd.clear();
+                currentCard = 0;
                 return currentPlayer;
             }             
         }
         currentPlayer.addCards( currentPile );
         currentPile.clear();
         lastAdd.clear();
+        currentCard = 0;
         return lastPlayer;
+    }
+    
+    public String getLastAdd()
+    {
+        String str = "";
+        for (Card c : lastAdd)
+        {
+            str = str + c.getNum() + " ";
+        }
+        return str;
+    }
+    
+    public String getPile()
+    {
+        String str = "";
+        for (Card c : currentPile)
+        {
+            str = str + c.getNum() + " ";
+        }
+        return str;
+    }
+    
+    public boolean hasCurrentCard()
+    {
+        return currentCard != 0; 
+    }
+    
+    public int getCurrentCard()
+    {
+        return currentCard;
     }
 
 }

@@ -34,6 +34,10 @@ public class Player
         this.currentHand.addCards(cards);
     }
     
+    public void removeCard(int c) {
+        this.currentHand.removeNum( c );
+    }
+    
 //    public Card playCard (String input)
 //    {
 //        if(viewHand().contains( input ))
