@@ -87,8 +87,7 @@ public class GameController
         }
 
     }
-
-
+    
     public static void distribute( ArrayList<Player> p, Deck d )
     {
         int counter = 1;
@@ -99,12 +98,12 @@ public class GameController
         }
     }
 
-
     public static void main( String[] args )
     {
-        Player p1 = new Player( "Avi" );
-        Player p2 = new Player( "Susan" );
-        Player p3 = new Player( "Harsh" );
+        Player p1 = new Human( "Avi" );
+        Player p2 = new Human( "Susan" );
+        Player p3 = new Human( "Harsh" );
+        Player p4 = new Bot("Bob");
         ArrayList<Player> players = new ArrayList<Player>();
         players.add( p1 );
         players.add( p2 );

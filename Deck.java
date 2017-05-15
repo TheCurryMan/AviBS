@@ -27,7 +27,6 @@ public class Deck
         for (int i = 52; i > 0; i--)
         {
             int index = (int) (Math.random()*i);
-            System.out.println(index);
             temp.add( deck.get( index ));
             deck.remove( index );
         }
