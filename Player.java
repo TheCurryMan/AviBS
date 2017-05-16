@@ -24,6 +24,11 @@ public class Player
         return currentHand.viewHand();
     }
     
+    public ArrayList<Card> getHand()
+    {
+        return this.currentHand.getHand();
+    }
+    
     public String getName()
     {
         return this.name;

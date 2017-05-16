@@ -7,9 +7,9 @@ public class GameController
     ArrayList<Player> players;
 
     Player lastPlayer;
+    Player last = new Human ("");
 
     Pile currentPile;
-
 
     public GameController( ArrayList<Player> players )
     {
@@ -20,6 +20,16 @@ public class GameController
 
     public void nextTurn( Player p )
     {
+        boolean isEmpty = false;
+        String name = last.getName();
+        if (!name.equals("") && last.getHand().isEmpty())
+        {
+            isEmpty = true;
+        }
+        if (last.getName().equals( p.getName() ))
+        {
+                currentPile = new Pile(); 
+        }
         System.out.println( currentPile.getPile() );
         System.out.println( "Hey " + p.getName() + "! It's your turn." );
         System.out.println( "Your current hand: " + p.viewHand() );
@@ -61,6 +71,11 @@ public class GameController
 
             }
             currentPile.addCards( cList, type );
+            last = players.get( 0 );
+            if (isEmpty)
+            {
+                System.out.println(last.getName() + " won!");
+            }
             players.add( players.remove( 0 ) );
             nextTurn( players.get( 0 ) );
 
@@ -76,6 +91,10 @@ public class GameController
             } else {
                 System.out.println("Whoops. " + players.get( players.size()-1 ).getName() + " had actually played the right cards. You've taken all the cards in the Pile");
                 players.add(0, players.remove( players.size()-1 ) );
+                if (isEmpty)
+                {
+                    System.out.println(last.getHand() + " won!");
+                }
                 nextTurn( players.get( 0 ) );
             }
 
@@ -96,6 +115,7 @@ public class GameController
             p.get( counter % p.size() ).addCard( c );
             counter++;
         }
+        
     }
 
     public static void main( String[] args )

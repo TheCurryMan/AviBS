@@ -64,6 +64,11 @@ public class Pile
         return str;
     }
     
+    public ArrayList<Card> emptyPile()
+    {
+        return null;
+    }
+    
     public boolean hasCurrentCard()
     {
         return currentCard != 0; 
