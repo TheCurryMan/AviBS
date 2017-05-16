@@ -48,15 +48,14 @@ public class GameController
             }
             System.out.println( "How many cards do you want to play?" );
             String num = user_input.next();
-            char n = num.charAt( 0 );
-            int number = Character.getNumericValue( n );
+            int number = Integer.parseInt( num );
             int type = currentPile.getCurrentCard();
             if ( !currentPile.hasCurrentCard() )
             {
                 System.out.println( "What do you want to play them as?" );
                 String val = user_input.next();
-                char c = val.charAt( 0 );
-                type = Character.getNumericValue( c );
+             
+                type = Integer.parseInt( val );
             }
 
             ArrayList<Card> cList = new ArrayList<Card>();
@@ -64,8 +63,7 @@ public class GameController
             {
                 System.out.println( "What card do you want to play?" );
                 String newCard = user_input.next();
-                char c = newCard.charAt( 0 );
-                int cardVal = Character.getNumericValue( c );
+                int cardVal = Integer.parseInt( newCard );
                 cList.add( new Card( cardVal ) );
                 p.removeCard( cardVal );
 
