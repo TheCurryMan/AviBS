@@ -7,9 +7,11 @@ public class GameController
     ArrayList<Player> players;
 
     Player lastPlayer;
-    Player last = new Human ("");
+
+    Player last = new Human( "" );
 
     Pile currentPile;
+
 
     public GameController( ArrayList<Player> players )
     {
@@ -23,32 +25,128 @@ public class GameController
         p.sortCards();
         boolean isEmpty = false;
         String name = last.getName();
-        if (!name.equals("") && last.getHand().isEmpty())
+        if ( !name.equals( "" ) && last.getHand().isEmpty() )
         {
             isEmpty = true;
         }
-        
-        System.out.println( currentPile.getPile() );
-        System.out.println( "Hey " + p.getName() + "! It's your turn." );
-        System.out.println( "Your current hand: " + p.viewHand() );
-        ArrayList<Card> play = new ArrayList<Card>();
-        System.out.println( "Enter B to call bluff, S to skip and P to play" );
-        Scanner user_input = new Scanner( System.in );
-        String currendHand = p.viewHand();
 
-        String cur = user_input.next();
-        if ( cur.equals( "P" ) )
+        if ( p.isBot() )
         {
-            ArrayList<Card> cList = new ArrayList<Card>();
             int type;
-            
-            if (currentPile.hasCurrentCard() && p.isBot() ) 
+            if ( currentPile.hasCurrentCard() )
             {
-                System.out.println( "We got this" );
-                p.BotPlay(currentPile.currentCard);
-                type = currentPile.currentCard;
-            } 
-            else {
+                System.out.println( "This is " + p.getName()
+                    + "'s current hand: " + p.viewHand() );
+                ArrayList<Card> cList = p
+                    .BotPlayCurrentCard( currentPile.currentCard, currentPile );
+
+                if ( cList.get( 0 ).getNum() == 14 )
+                {
+                    System.out.println( p.getName() + " called bluff!" );
+                    Player p1 = currentPile.bluffCalled( players.get( 0 ),
+                        players.get( players.size() - 1 ) );
+                    if ( p1 == players.get( 0 ) )
+                    {
+                        System.out.println(
+                            players.get( 0 ).getName() + " was right! "
+                                + players.get( players.size() - 1 ).getName()
+                                + " has taken all the cards in the Pile" );
+                        nextTurn( players.get( 0 ) );
+                    }
+                    else
+                    {
+                        System.out.println( "Whoops. "
+                            + players.get( players.size() - 1 ).getName()
+                            + " had actually played the right cards. You've taken all the cards in the Pile" );
+                        players.add( 0, players.remove( players.size() - 1 ) );
+                        if ( isEmpty )
+                        {
+                            System.out.println( last.getHand() + " won!" );
+                            System.out.println( "Thanks for playing!" );
+                        }
+                        else
+                        {
+                            nextTurn( players.get( 0 ) );
+                        }
+                    }
+
+                }
+
+                else if ( cList.size() > 0 )
+                {
+                    type = currentPile.currentCard;
+                    System.out.println( p.getName() + " played " + cList.size()
+                        + " " + currentPile.currentCard + "'s" );
+                    currentPile.addCards( cList, type );
+
+                    if ( isEmpty )
+                    {
+                        System.out.println( last.getName() + " won!" );
+                        System.out.println( "Thanks for playing!" );
+                    }
+                    else
+                    {
+                        last = players.get( 0 );
+                        players.add( players.remove( 0 ) );
+                        nextTurn( players.get( 0 ) );
+                    }
+                }
+                else
+                {
+                    System.out.println( p.getName() + " skipped" );
+                    if ( last.getName().equals( p.getName() ) )
+                    {
+                        currentPile = new Pile();
+                        nextTurn( players.get( 0 ) );
+                    }
+                    else
+                    {
+                        players.add( players.remove( 0 ) );
+                        nextTurn( players.get( 0 ) );
+                    }
+                }
+
+            }
+            else
+            {
+                System.out.println( "This is " + p.getName()
+                    + "'s current hand: " + p.viewHand() );
+                ArrayList<Card> cList = p.BotPlayHighest();
+                type = cList.remove( 0 ).getNum();
+                currentPile.addCards( cList, type );
+                System.out.println( p.getName() + " played " + cList.size()
+                    + " " + currentPile.currentCard + "'s" );
+
+                if ( isEmpty )
+                {
+                    System.out.println( last.getName() + " won!" );
+                    System.out.println( "Thanks for playing!" );
+                }
+                else
+                {
+                    last = players.get( 0 );
+                    players.add( players.remove( 0 ) );
+                    nextTurn( players.get( 0 ) );
+                }
+            }
+
+        }
+
+        else
+        {
+            System.out.println( currentPile.getPile() );
+            System.out.println( "Hey " + p.getName() + "! It's your turn." );
+            System.out.println( "Your current hand: " + p.viewHand() );
+            System.out
+                .println( "Enter B to call bluff, S to skip and P to play" );
+            Scanner user_input = new Scanner( System.in );
+            String currendHand = p.viewHand();
+            String cur = user_input.next();
+            int type;
+            if ( cur.equals( "P" ) )
+            {
+                ArrayList<Card> cList = new ArrayList<Card>();
+
                 if ( currentPile.hasCurrentCard() )
                 {
                     System.out.println(
@@ -62,11 +160,10 @@ public class GameController
                 {
                     System.out.println( "What do you want to play them as?" );
                     String val = user_input.next();
-                 
+
                     type = Integer.parseInt( val );
                 }
-    
-                
+
                 for ( int i = 0; i < number; i++ )
                 {
                     System.out.println( "What card do you want to play?" );
@@ -74,56 +171,71 @@ public class GameController
                     int cardVal = Integer.parseInt( newCard );
                     cList.add( new Card( cardVal ) );
                     p.removeCard( cardVal );
-    
-                }
-            }
-            currentPile.addCards( cList, type );
-            if (isEmpty)
-            {
-                System.out.println(last.getName() + " won!");
-                System.out.println( "Thanks for playing!" );
-            } else {
-                last = players.get( 0 );
-                players.add( players.remove( 0 ) );
-                nextTurn( players.get( 0 ) );
-            }
 
-        }
-        else if ( cur.equals("B") )
-        {
-            Player p1 = currentPile.bluffCalled( players.get( 0 ),
-                players.get( players.size() - 1 ) );
-            if ( p1 == players.get( 0 ) )
-            {   
-                System.out.println( "You were right! " + players.get( players.size()-1 ).getName() + " has taken all the cards in the Pile");
-                nextTurn( players.get( 0 ) );
-            } else {
-                System.out.println("Whoops. " + players.get( players.size()-1 ).getName() + " had actually played the right cards. You've taken all the cards in the Pile");
-                players.add(0, players.remove( players.size()-1 ) );
-                if (isEmpty)
+                }
+
+                currentPile.addCards( cList, type );
+                if ( isEmpty )
                 {
-                    System.out.println(last.getHand() + " won!");
+                    System.out.println( last.getName() + " won!" );
                     System.out.println( "Thanks for playing!" );
-                } else {
+                }
+                else
+                {
+                    last = players.get( 0 );
+                    players.add( players.remove( 0 ) );
                     nextTurn( players.get( 0 ) );
                 }
-            }
 
-        }
-        else if ( cur.equals("S") )
-        {
-            if (last.getName().equals( p.getName() ))
+            }
+            else if ( cur.equals( "B" ) )
             {
-                    currentPile = new Pile(); 
-                    nextTurn(players.get( 0 ));
-            } else {
-                players.add( players.remove( 0 ) );
-                nextTurn( players.get( 0 ) );
+                Player p1 = currentPile.bluffCalled( players.get( 0 ),
+                    players.get( players.size() - 1 ) );
+                if ( p1 == players.get( 0 ) )
+                {
+                    System.out.println( "You were right! "
+                        + players.get( players.size() - 1 ).getName()
+                        + " has taken all the cards in the Pile" );
+                    nextTurn( players.get( 0 ) );
+                }
+                else
+                {
+                    System.out.println( "Whoops. "
+                        + players.get( players.size() - 1 ).getName()
+                        + " had actually played the right cards. You've taken all the cards in the Pile" );
+                    players.add( 0, players.remove( players.size() - 1 ) );
+                    if ( isEmpty )
+                    {
+                        System.out.println( last.getHand() + " won!" );
+                        System.out.println( "Thanks for playing!" );
+                    }
+                    else
+                    {
+                        nextTurn( players.get( 0 ) );
+                    }
+                }
+
+            }
+            else if ( cur.equals( "S" ) )
+            {
+                System.out.println( p.getName() + " skipped" );
+                if ( last.getName().equals( p.getName() ) )
+                {
+                    currentPile = new Pile();
+                    nextTurn( players.get( 0 ) );
+                }
+                else
+                {
+                    players.add( players.remove( 0 ) );
+                    nextTurn( players.get( 0 ) );
+                }
             }
         }
 
     }
-    
+
+
     public static void distribute( ArrayList<Player> p, Deck d )
     {
         int counter = 1;
@@ -132,15 +244,17 @@ public class GameController
             p.get( counter % p.size() ).addCard( c );
             counter++;
         }
-        
+
     }
+
 
     public static void main( String[] args )
     {
         Player p1 = new Human( "Avi" );
         Player p2 = new Human( "Susan" );
         Player p3 = new Human( "Harsh" );
-        Player p4 = new Bot("Bob");
+        Player p4 = new Bot( "Bob" );
+
         ArrayList<Player> players = new ArrayList<Player>();
         players.add( p1 );
         players.add( p4 );
@@ -150,7 +264,8 @@ public class GameController
 
         Deck d = new Deck();
         distribute( players, d );
-        game.nextTurn( p1 );
+        System.out.println( p4.viewHand() );
+        game.nextTurn( players.get( 0 ) );
 
     }
 

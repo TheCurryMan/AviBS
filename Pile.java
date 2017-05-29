@@ -78,5 +78,10 @@ public class Pile
     {
         return currentCard;
     }
+    
+    public int getNumOfCards()
+    {
+        return currentPile.size();
+    }
 
 }

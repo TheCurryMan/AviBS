@@ -1,11 +1,10 @@
 
 public class Human extends Player
 {
-    
-    public Human(String name)
+
+    public Human( String name )
     {
-        super(name, true);
+        super( name, true );
     }
-    
-    
+
 }
