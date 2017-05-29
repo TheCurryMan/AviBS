@@ -22,6 +22,7 @@ public class GameController
 
     public void nextTurn( Player p )
     {
+        System.out.println( "" );
         p.sortCards();
         boolean isEmpty = false;
         String name = last.getName();
@@ -35,8 +36,6 @@ public class GameController
             int type;
             if ( currentPile.hasCurrentCard() )
             {
-                System.out.println( "This is " + p.getName()
-                    + "'s current hand: " + p.viewHand() );
                 ArrayList<Card> cList = p
                     .BotPlayCurrentCard( currentPile.currentCard, currentPile );
 
@@ -109,8 +108,6 @@ public class GameController
             }
             else
             {
-                System.out.println( "This is " + p.getName()
-                    + "'s current hand: " + p.viewHand() );
                 ArrayList<Card> cList = p.BotPlayHighest();
                 type = cList.remove( 0 ).getNum();
                 currentPile.addCards( cList, type );
@@ -134,9 +131,13 @@ public class GameController
 
         else
         {
-            System.out.println( currentPile.getPile() );
             System.out.println( "Hey " + p.getName() + "! It's your turn." );
             System.out.println( "Your current hand: " + p.viewHand() );
+            if ( currentPile.hasCurrentCard() )
+            {
+                System.out.println(
+                    "The current card is " + currentPile.getCurrentCard() );
+            }
             System.out
                 .println( "Enter B to call bluff, S to skip and P to play" );
             Scanner user_input = new Scanner( System.in );
@@ -147,11 +148,7 @@ public class GameController
             {
                 ArrayList<Card> cList = new ArrayList<Card>();
 
-                if ( currentPile.hasCurrentCard() )
-                {
-                    System.out.println(
-                        "The current card is " + currentPile.getCurrentCard() );
-                }
+                
                 System.out.println( "How many cards do you want to play?" );
                 String num = user_input.next();
                 int number = Integer.parseInt( num );
@@ -250,6 +247,8 @@ public class GameController
 
     public static void main( String[] args )
     {
+        System.out.println( "Welcome to AviBS! Let's begin." );
+        
         Player p1 = new Human( "Avi" );
         Player p2 = new Human( "Susan" );
         Player p3 = new Human( "Harsh" );
@@ -264,7 +263,6 @@ public class GameController
 
         Deck d = new Deck();
         distribute( players, d );
-        System.out.println( p4.viewHand() );
         game.nextTurn( players.get( 0 ) );
 
     }

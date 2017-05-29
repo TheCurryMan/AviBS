@@ -53,12 +53,6 @@ public class Bot extends Player
                     break;
             }
         }
-
-        System.out.println( singles );
-        System.out.println( doubles );
-        System.out.println( triples );
-        System.out.println( quadruples );
-
     }
 
 
