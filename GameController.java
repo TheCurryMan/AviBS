@@ -1,7 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/**
+ * 
+ *  The main class for the AviBS application
+ *
+ *  @author  Avi, Susan, Harsh
+ */
 public class GameController
 {
     ArrayList<Player> players;
@@ -12,14 +17,36 @@ public class GameController
 
     Pile currentPile;
 
-
+    /**
+     * Constructs a new GameController with an ArrayList of the players who
+     * will be participating in the game. Initializes currentPile to an empty pile. 
+     * @param players the list of players who will be playing in the game
+     * @author Avi
+     */
     public GameController( ArrayList<Player> players )
     {
         this.players = players;
         this.currentPile = new Pile();
     }
 
-
+    /**
+     * It first checks to see if the player is a human or a bot. If it's a bot, 
+     * Bot's BotPlayCurrentCard method is called and the appropriate response is
+     * printed out. If it's a human player, the player's current hand is first printed
+     * out. The player is then prompted for an input, and they can play either
+     * B for bluff, P for play, or S for skip. If they play B for bluff, then the program 
+     * checks to see if they are correct/if the previous player who played a card 
+     * actually played what they said they did. If so, the player who called the bluff
+     * gets all the cards. If not, the player who played the wrong card gets the pile. 
+     * If the player enters S for skip, the next player in the rotation will be prompted
+     * to play. If a player enters P for play, then they will be prompted for the 
+     * number of cards they want to play and the actual cards in their hand that they 
+     * are going to play. The program also clears the pile if everyone skips, and if 
+     * someone plays/calls a bluff after another player empties their hand, then the 
+     * player with the empty hand wins. 
+     * @param p Player
+     * @author Avi, Susan
+     */
     public void nextTurn( Player p )
     {
         System.out.println( "" );
@@ -232,7 +259,12 @@ public class GameController
 
     }
 
-
+    /**
+     * This gives each player every third card in the deck. 
+     * @param p player
+     * @param d deck 
+     * @author Harsh
+     */
     public static void distribute( ArrayList<Player> p, Deck d )
     {
         int counter = 1;
@@ -244,7 +276,11 @@ public class GameController
 
     }
 
-
+    /**
+     * The main method for the AviBS application
+     * @param args arguments
+     * @author Harsh
+     */
     public static void main( String[] args )
     {
         System.out.println( "Welcome to AviBS! Let's begin." );

@@ -1,11 +1,19 @@
 import java.util.ArrayList;
-
-
+/**
+ * 
+ *  Represents a deck in the AviBS project
+ *
+ *  @author  Susan 
+ */
 public class Deck
 {
     ArrayList<Card> deck = new ArrayList<Card>();
 
-
+    /**
+     * Constructs a new deck with 52 cards. There are four of each number from 1-13, and 
+     * the 52 cards in the deck are randomly shuffled. 
+     * @author Susan
+     */
     public Deck()
     {
         for ( int i = 1; i < 14; i++ )
@@ -21,6 +29,10 @@ public class Deck
     }
 
 
+    /**
+     * Randomly shuffles the cards in the deck 
+     * @author Susan
+     */
     public void shuffle()
     {
         ArrayList<Card> temp = new ArrayList<Card>();
@@ -33,6 +45,11 @@ public class Deck
         deck = temp;
     }
     
+    /**
+     * Gets the list of the cards in the deck
+     * @return the cards in deck
+     * @author Susan
+     */
     public ArrayList<Card> getDeck()
     {
         return deck;

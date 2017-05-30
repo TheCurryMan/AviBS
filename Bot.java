@@ -1,6 +1,14 @@
 import java.util.ArrayList;
 
-
+/**
+ * 
+ *  Represents an AI player in the AviBS project
+ *
+ *  @author  Avi
+ *  @author  Period: 5
+ *  @author  Assignment: AviBS
+ *  @author  Sources: None
+ */
 public class Bot extends Player
 {
     private ArrayList<Integer> singles = new ArrayList<Integer>();
@@ -11,12 +19,15 @@ public class Bot extends Player
 
     private ArrayList<Integer> quadruples = new ArrayList<Integer>();
 
-
+    /**
+     * Constructs a new bot with a given name
+     * @param name the bot's name
+     * @author Avi
+     */
     public Bot( String name )
     {
         super( name, false );
     }
-
 
     public void sortCards()
     {
