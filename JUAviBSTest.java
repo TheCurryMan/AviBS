@@ -114,21 +114,22 @@ public class JUAviBSTest extends CardComparator
     }
     
     @Test
-    public void handConstructor()//**
+    public void handConstructor()//*
     {
         Hand h = new Hand (); 
         assertNotNull("<< Invalid Hand Constructor >>",h);
     }
     
     @Test
-    public void handRemoveNum()//** (i don't think this method works?) 
+    public void handRemoveNum()//** (???) 
     {
         Hand h = new Hand (); 
         h.add( 1 );
         h.add( 1 );
         h.add( 2 );
+        //System.out.print( h.getHand() );
         h.removeNum( 1 );
-        //System.out.print( h );
+        //System.out.print( h.getHand() );
         //assertTrue("<< Invalid Hand removeNum method >>", h.contains( 1 ) && h.contains(2) && h.size() == 2);
     }
     
@@ -142,27 +143,27 @@ public class JUAviBSTest extends CardComparator
     }
     
     @Test
-    public void handAddCards()//** (i don't think this method works?) 
+    public void handAddCards()//*
     {
         Hand h = new Hand ();
         ArrayList<Card> c = new ArrayList<Card>();
         Card c1 = new Card (1); 
         Card c2 = new Card (2);
         c.add( c1 );
-        c.add( c2 );
-        //System.out.print( c );
         h.addCards( c );
-        //System.out.print( h );
-        //assertTrue("<< Invalid Hand addCards method >>", h.contains( 1 ) && h.contains(2) && h.size() == 2);
+        assertTrue("<< Invalid Hand getHand method >>", h.getHand().toString().contains( "[Card@" ));
     }
     
     @Test
-    public void handGetHand()//** (what am i doing wrong :(( ) 
+    public void handGetHand()//*
     {
         Hand h = new Hand ();
-        //h.add( 1 );
-        //h.add( 2 );
-        //assertEquals("<< Invalid Hand getHand method >>", h.getHand().equals( h ));
+        ArrayList<Card> c = new ArrayList<Card>();
+        Card c1 = new Card (1); 
+        Card c2 = new Card (2);
+        c.add( c1 );
+        h.addCards( c );
+        assertTrue("<< Invalid Hand getHand method >>", h.getHand().toString().contains( "[Card@" ));
     }
     
     @Test
@@ -278,7 +279,7 @@ public class JUAviBSTest extends CardComparator
     }
     
     @Test
-    public void pileGetCurrentCard()//***
+    public void pileGetCurrentCard()//*
     {
         Pile p = new Pile (); 
         ArrayList<Card> cards = new ArrayList<Card>(); 
