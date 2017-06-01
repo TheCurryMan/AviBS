@@ -49,7 +49,7 @@ public class GameController
      */
     public void nextTurn( Player p )
     {
-        System.out.println( "" );
+        System.out.println(" ");
         p.sortCards();
         boolean isEmpty = false;
         String name = last.getName();
@@ -66,7 +66,7 @@ public class GameController
                 ArrayList<Card> cList = p
                     .BotPlayCurrentCard( currentPile.currentCard, currentPile );
 
-                if ( cList.get( 0 ).getNum() == 14 )
+                if ( cList.size() > 0 && cList.get( 0 ).getNum() == 14 )
                 {
                     System.out.println( p.getName() + " called bluff!" );
                     Player p1 = currentPile.bluffCalled( players.get( 0 ),
@@ -122,8 +122,17 @@ public class GameController
                     System.out.println( p.getName() + " skipped" );
                     if ( last.getName().equals( p.getName() ) )
                     {
-                        currentPile = new Pile();
-                        nextTurn( players.get( 0 ) );
+              
+                        if (p.getHand().size() == 0)
+                        {
+                            isEmpty = true;
+                            System.out.println( last.getName() + " won!" );
+                            System.out.println( "Thanks for playing!" );
+                        } else {
+                            
+                            currentPile = new Pile();
+                            nextTurn( players.get( 0 ) );
+                        }
                     }
                     else
                     {
@@ -135,6 +144,7 @@ public class GameController
             }
             else
             {
+                
                 ArrayList<Card> cList = p.BotPlayHighest();
                 type = cList.remove( 0 ).getNum();
                 currentPile.addCards( cList, type );
@@ -285,9 +295,9 @@ public class GameController
     {
         System.out.println( "Welcome to AviBS! Let's begin." );
         
-        Player p1 = new Human( "Avi" );
-        Player p2 = new Human( "Susan" );
-        Player p3 = new Human( "Harsh" );
+        Player p1 = new Bot( "Avi" );
+        Player p2 = new Bot( "Susan" );
+        Player p3 = new Bot( "Harsh" );
         Player p4 = new Bot( "Bob" );
 
         ArrayList<Player> players = new ArrayList<Player>();
