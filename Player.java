@@ -2,9 +2,9 @@ import java.util.ArrayList;
 /**
  * Represents a player in the AviBS project
  *
- *  @author  Harsh, Susan
+ *  @author  Avi, Susan
  */
-public class Player
+public abstract class Player
 {
     private String name;
 
@@ -14,7 +14,7 @@ public class Player
 
     /**
      * No-arg constructor for a new player
-     * @Harsh
+     * @author Avi
      */
     public Player()
     {
@@ -26,7 +26,7 @@ public class Player
      * initializes the player's current hand
      * @param name the player's name
      * @param type whether it's a human or a bot
-     * @author Harsh
+     * @author Avi
      */
     public Player( String name, boolean type )
     {
@@ -38,7 +38,7 @@ public class Player
     /**
      * Adds a card to the player's hand
      * @param c card to be added
-     * @author Harsh
+     * @author Avi
      */
     public void addCard( Card c )
     {
@@ -48,7 +48,7 @@ public class Player
     /**
      * Prints the cards that are currently in the player's hand
      * @return a string with the cards that are currently in the player's hand
-     * @author Harsh
+     * @author Avi
      */
     public String viewHand()
     {
@@ -58,7 +58,7 @@ public class Player
     /**
      * Gets the current player's hand
      * @return the player's hand
-     * @author Harsh
+     * @author Avi
      */
     public ArrayList<Card> getHand()
     {
@@ -68,7 +68,7 @@ public class Player
     /**
      * Gets the current player's name
      * @return the player's name
-     * @author Harsh
+     * @author Avi
      */
     public String getName()
     {
@@ -105,20 +105,12 @@ public class Player
         return !isHuman;
     }
 
-    public void sortCards()
-    {
-    };
+    public abstract void sortCards();
 
 
-    public ArrayList<Card> BotPlayCurrentCard( int c, Pile p )
-    {
-        return null;
-    }
+    public abstract ArrayList<Card> BotPlayCurrentCard( int c, Pile p );
+    
 
 
-    public ArrayList<Card> BotPlayHighest()
-    {
-        return null;
-    }
-
+    public abstract ArrayList<Card> BotPlayHighest();
 }

@@ -1,13 +1,14 @@
 import java.util.ArrayList;
 
+
 /**
  * 
- *  Represents an AI player in the AviBS project
+ * Represents an AI player in the AviBS project
  *
- *  @author  Avi
- *  @author  Period: 5
- *  @author  Assignment: AviBS
- *  @author  Sources: None
+ * @author Avi
+ * @author Period: 5
+ * @author Assignment: AviBS
+ * @author Sources: None
  */
 public class Bot extends Player
 {
@@ -19,9 +20,12 @@ public class Bot extends Player
 
     private ArrayList<Integer> quadruples = new ArrayList<Integer>();
 
+
     /**
      * Constructs a new bot with a given name
-     * @param name the bot's name
+     * 
+     * @param name
+     *            the bot's name
      * @author Avi
      */
     public Bot( String name )
@@ -29,6 +33,12 @@ public class Bot extends Player
         super( name, false );
     }
 
+
+    /**
+     * Sorts the cards in the hand into singles, doubles, triples and quadruples
+     * 
+     * @author Avi
+     */
     public void sortCards()
     {
         singles.clear();
@@ -67,6 +77,10 @@ public class Bot extends Player
     }
 
 
+    /**
+     * If there is a current card being played, this is the AI methods that
+     * determines what the Bot does
+     */
     public ArrayList<Card> BotPlayCurrentCard( int currentCard, Pile p )
     {
         ArrayList<Card> play = new ArrayList<Card>();
@@ -126,6 +140,9 @@ public class Bot extends Player
     }
 
 
+    /**
+     * 
+     */
     public ArrayList<Card> BotPlayHighest()
     {
 
