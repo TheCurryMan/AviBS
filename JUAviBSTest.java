@@ -296,6 +296,7 @@ public class JUAviBSTest extends CardComparator
             p.getCurrentCard() == 1 );
     }
 
+
     @Test
     public void playerConstructorParams()// *
     {
@@ -329,7 +330,7 @@ public class JUAviBSTest extends CardComparator
     @Test
     public void playerGetHand()// *
     {
-        Player p = new Human( "joe");
+        Player p = new Human( "joe" );
         Card c = new Card( 1 );
         p.addCard( c );
         ArrayList<Card> a = new ArrayList<Card>();

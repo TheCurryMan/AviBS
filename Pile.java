@@ -9,11 +9,11 @@ import java.util.Stack;
  */
 public class Pile
 {
-    
 
     ArrayList<Card> lastAdd;
+
     Stack<ArrayList<Card>> currentPile;
-    
+
     int currentCard;
 
 
@@ -72,7 +72,7 @@ public class Pile
         {
             if ( c.getNum() != currentCard )
             {
-                while(currentPile.size() > 0)
+                while ( currentPile.size() > 0 )
                 {
                     lastPlayer.addCards( currentPile.pop() );
                 }
@@ -82,7 +82,7 @@ public class Pile
                 return currentPlayer;
             }
         }
-        while(currentPile.size() > 0)
+        while ( currentPile.size() > 0 )
         {
             currentPlayer.addCards( currentPile.pop() );
         }
@@ -121,7 +121,7 @@ public class Pile
     {
         String str = "";
         Stack<ArrayList<Card>> temp = new Stack<ArrayList<Card>>();
-        while (currentPile.size() > 0)
+        while ( currentPile.size() > 0 )
         {
             ArrayList<Card> cList = currentPile.pop();
             for ( Card c : cList )
@@ -130,7 +130,7 @@ public class Pile
             }
             temp.push( cList );
         }
-        while (temp.size() > 0)
+        while ( temp.size() > 0 )
         {
             currentPile.push( temp.pop() );
         }
